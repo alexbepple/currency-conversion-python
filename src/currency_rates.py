@@ -1,34 +1,12 @@
-import urllib2, re
-from datetime import datetime
+import urllib2
+from symbols import SymbolsRetriever
 
 class CurrencyRates:
-    def __init__(self):
-        self.cached_symbols = None
-        self.last_updated = datetime.min
-
-
-    def currency_symbols(self):
-        delta = datetime.now() - self.last_updated
-        if (self.cached_symbols is not None) and delta.seconds <= 300:
-            return self.cached_symbols
-
-        opener = urllib2.build_opener()
-        opener.addheaders = [('User-agent', 'Mozilla/5.0')]
-        url = "http://www.xe.com/iso4217.php" 
-        page = opener.open(url).read()
-
-        symbols = {}
-        currency_regex = r'href="/currency/[^>]+>(...)</a></td><td class="[^"]+">([A-Za-z ]+)'
-        for m in re.finditer(currency_regex, page):
-            symbols[m.group(1)] = m.group(2)
-
-        self.cached_symbols = symbols
-        self.last_updated = datetime.now()
-        return symbols
-
+    def __init__(self, symbols_retriever):
+        self.symbols_retriever = symbols_retriever
 
     def get_rate(self,from_currency, to_currency):
-        symbol_to_name = currency_symbols()
+        symbol_to_name = self.symbols_retriever.get_symbols()
         if not (from_currency in symbol_to_name):
             raise ValueError("Invalid from currency: {}".format(from_currency))
         if not (to_currency in symbol_to_name):
@@ -54,4 +32,4 @@ def currency_symbols():
 def conversion_rate(from_currency, to_currency):
     return _currency_rates.get_rate(from_currency, to_currency)
 
-_currency_rates = CurrencyRates()
+_currency_rates = CurrencyRates(SymbolsRetriever())
