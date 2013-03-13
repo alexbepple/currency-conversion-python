@@ -1,7 +1,7 @@
 from nose.tools import *
 
 from mock import patch, Mock
-from currency_rates import conversion_rate, currency_symbols
+from currency_rates import CurrencyRates
 
 class CurrencyRates_Test:
     @istest
@@ -19,5 +19,5 @@ class CurrencyRates_Test:
                 '<div id="converter_results"><ul><li><b>1 x = 2 y</b>'
             )
 
-            eq_(conversion_rate('abc', 'xyz'), 2)
+            eq_(CurrencyRates().get_rate('abc', 'xyz'), 2)
 
