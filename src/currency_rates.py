@@ -1,5 +1,5 @@
 import urllib2
-from symbols import SymbolsRetriever
+from symbols import SymbolsRetriever, CachingSymbolsRetriever
 
 class CurrencyRates:
     def __init__(self, symbols_retriever):
@@ -29,4 +29,4 @@ class CurrencyRates:
 def conversion_rate(from_currency, to_currency):
     return _currency_rates.get_rate(from_currency, to_currency)
 
-_currency_rates = CurrencyRates(SymbolsRetriever())
+_currency_rates = CurrencyRates(CachingSymbolsRetriever(SymbolsRetriever()))
