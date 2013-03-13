@@ -1,5 +1,5 @@
 notification :off
 
 guard 'shell' do
-  watch(/^test.*.py$/) {|m| `nosetests test/unit` }
+  watch(/^(src|test).*.py$/) {|m| `nosetests test/unit` }
 end
