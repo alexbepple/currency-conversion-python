@@ -26,9 +26,6 @@ class CurrencyRates:
         return float(value)
 
 
-def currency_symbols():
-    return _currency_rates.currency_symbols()
-
 def conversion_rate(from_currency, to_currency):
     return _currency_rates.get_rate(from_currency, to_currency)
 
