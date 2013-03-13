@@ -17,3 +17,16 @@ class CurrencyRates_Test:
 
             eq_(CurrencyRates(symbols).get_rate('abc', 'xyz'), 2)
 
+    @istest
+    @raises(ValueError)
+    def only_allows_valid_from_currency(self):
+        symbols = Mock()
+        symbols.get_symbols.return_value = {}
+        CurrencyRates(symbols).get_rate('foo', None)
+
+    @istest
+    @raises(ValueError)
+    def only_allows_valid_to_currency(self):
+        symbols = Mock()
+        symbols.get_symbols.return_value = {'foo'}
+        CurrencyRates(symbols).get_rate('foo', None)
