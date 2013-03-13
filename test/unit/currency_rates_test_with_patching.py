@@ -3,9 +3,9 @@ from nose.tools import *
 from mock import patch, Mock
 from currency_rates import conversion_rate, currency_symbols
 
-class Foo_Test:
+class CurrencyRates_Test:
     @istest
-    def foo(self):
+    def gets_conversion_rate(self):
         with patch('currency_rates.urllib2') as urllib:
             opener = Mock()
             urllib.build_opener = opener
