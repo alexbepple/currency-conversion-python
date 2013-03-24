@@ -1,0 +1,44 @@
+#!/bin/bash
+
+  black='\033[30;m'
+    red='\033[31;m'
+  green='\033[32;m'
+ yellow='\033[33;m'
+   blue='\033[34;m'
+magenta='\033[35;m'
+   cyan='\033[36;m'
+  white='\033[37;m'
+
+function reset_colors() {
+    tput sgr0
+}
+function switch_to_color() {
+    local color=$1
+    echo -en "$color"
+}
+function cecho () {
+    local option=""
+    if [ "$1" == '-n' ]; then
+        option="$1"
+        shift
+    fi
+    local message=${1:-""}
+    local color=${2:-""}
+
+    switch_to_color $color
+    echo $option "$message"
+    reset_colors
+}
+function start_step() {
+    local message="$1"
+    cecho "$message …" $white
+}
+
+
+
+start_step "Run unit tests"
+nosetests test/unit
+
+start_step "Run integration tests"
+nosetests test/integration
+
