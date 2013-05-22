@@ -17,14 +17,19 @@ class SymbolsRetriever:
 
 
 class CachingSymbolsRetriever:
-    def __init__(self, decorated_retriever):
+    def __init__(self, decorated_retriever, clock):
         self.cached_symbols = None
         self.last_updated = datetime.min
         self.decorated_retriever = decorated_retriever
+        self.clock = clock
 
     def get_symbols(self):
-        delta = datetime.now() - self.last_updated
+        delta = self.clock.now() - self.last_updated
         if self.cached_symbols is None or delta.seconds > 300:
             self.cached_symbols = self.decorated_retriever.get_symbols()
-        self.last_updated = datetime.now()
+        self.last_updated = self.clock.now()
         return self.cached_symbols
+
+class Clock:
+    def now(self):
+        return datetime.now()

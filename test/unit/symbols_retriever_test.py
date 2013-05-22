@@ -23,7 +23,11 @@ class CachingSymbolsRetriever_Test:
     def setUp(self):
         self.actual = Mock()
         self.actual.get_symbols.return_value = sentinel.some_symbols
-        self.retriever = CachingSymbolsRetriever(self.actual)
+
+        self.clock = Mock()
+        self.clock.now.return_value = datetime.now()
+
+        self.retriever = CachingSymbolsRetriever(self.actual, self.clock)
 
     @istest
     def passes_on_the_actual_symbols(self):
@@ -41,12 +45,13 @@ class CachingSymbolsRetriever_Test:
         now = datetime.now()
         later = now + timedelta(minutes=5, seconds=1)
         returns = [now, now, later, later]
-        def side_effect(*args):
+        def tick_time(*args):
             return returns.pop(0)
-        with patch('symbols.datetime') as mock:
-            mock.now = Mock(side_effect=side_effect)
-            self.retriever.get_symbols()
-            self.retriever.get_symbols()
-            eq_(self.actual.mock_calls, 
-                [call.get_symbols(), call.get_symbols()])
+
+        self.clock.now.side_effect = tick_time
+
+        self.retriever.get_symbols()
+        self.retriever.get_symbols()
+        eq_(self.actual.mock_calls, 
+            [call.get_symbols(), call.get_symbols()])
 
