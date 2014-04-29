@@ -1,4 +1,0 @@
-#!/bin/bash
-
-bundle exec guard start --clear --no-interactions
-
