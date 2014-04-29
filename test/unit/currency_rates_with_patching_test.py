@@ -12,7 +12,7 @@ def test_gets_conversion_rate():
 
 		urllib.urlopen = Mock()
 		urllib.urlopen.return_value.read.return_value = (
-			'<div id="converter_results"><ul><li><b>1 x = 2 y</b>'
+			'<div id="converter_results"><ul><li><strong>1 x = 2 y</strong>'
 		)
 
 		assert conversion_rate('abc', 'xyz') == 2
