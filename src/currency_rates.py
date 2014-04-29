@@ -40,8 +40,8 @@ def conversion_rate(from_currency, to_currency):
 
     start = page.rindex('<div id="converter_results"><ul><li>')
     substring = page[start:]
-    start_of_interesting_stuff = substring.index('<b>') + 3
-    end_of_interesting_stuff = substring.index('</b>', start_of_interesting_stuff)
+    start_of_interesting_stuff = substring.index('<strong>') + 3
+    end_of_interesting_stuff = substring.index('</strong>', start_of_interesting_stuff)
     interesting_stuff = substring[start_of_interesting_stuff:end_of_interesting_stuff]
     parts = interesting_stuff.split('=')
     value = parts[1].strip().split(' ')[0]
