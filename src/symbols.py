@@ -24,10 +24,11 @@ class CachingSymbolsRetriever:
         self.clock = clock
 
     def get_symbols(self):
-        delta = self.clock.now() - self.last_updated
+        now = self.clock.now()
+        delta = now - self.last_updated
         if self.cached_symbols is None or delta.seconds > 300:
             self.cached_symbols = self.decorated_retriever.get_symbols()
-        self.last_updated = self.clock.now()
+        self.last_updated = now
         return self.cached_symbols
 
 class Clock:
