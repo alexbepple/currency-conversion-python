@@ -36,11 +36,7 @@ def test_caches_the_symbols(caching_retriever, another_retriever):
 def test_gets_the_actual_symbols_anew_after_5_minutes(caching_retriever, another_retriever, clock):
 	now = datetime.now()
 	later = now + timedelta(minutes=5, seconds=1)
-	returns = [now, now, later, later]
-	def tick_time(*args):
-		return returns.pop(0)
-
-	clock.now.side_effect = tick_time
+	clock.now.side_effect = [now, now, later, later]
 
 	caching_retriever.get_symbols()
 	caching_retriever.get_symbols()
