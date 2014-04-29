@@ -7,14 +7,14 @@ The code is the Python version of the example that Brett Schuchert has used in t
 * See "[A story about too much power](http://schuchert.wikispaces.com/JMockIt.AStoryAboutTooMuchPower)" for a written treatment of the Java version of this example.
 
 
-# Git tags
+# Git branches
 
-* `alpha` The legacy code we start out with.
-* `beta` Now we have an integration test and a unit test that uses a Python form of monkey patching: namespace overriding.
-* `gamma` Class extracted.
-* `delta` Class for currency symbols extracted.
-* `epsilon` Extracted caching to decorator pattern.
-    * While very OO, it’s not very Pythonic. What would be a better solution? Something with Python decorators?
+* `master` The legacy code we start out with.
+* `golden_master` Now we have an integration test and a pseudo-unit test that uses a Python form of monkey patching: namespace overriding.
+* `solution` is not complete, but a significant step forward.
+    * Classes extracted. 
+    * Class for currency symbols extracted.
+    * Extracted caching to decorator pattern. – While very OO, this is not very Pythonic. What would be a better solution? Something with Python decorators?
 
 
 # Credits
