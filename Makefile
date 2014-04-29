@@ -1,7 +1,14 @@
 PYTHONPATH := PYTHONPATH=src
 
-test-before-commit:
+check: flake8 test-unit test-integration
+
+flake8:
+	flake8 .
+
+test-unit:
 	$(PYTHONPATH) py.test test/unit
+
+test-integration:
 	$(PYTHONPATH) py.test test/integration
 
 tdd:
