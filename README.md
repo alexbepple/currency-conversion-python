@@ -12,7 +12,7 @@ The code is the Python version of the example that Brett Schuchert has used in t
 * `master` The legacy code we start out with.
 * `golden_master` Now we have an integration test and a pseudo-unit test that uses a Python form of monkey patching: namespace overriding.
 * `solution` is not complete, but a significant step forward.
-    * Classes extracted. 
+    * Classes extracted.
     * Class for currency symbols extracted.
     * Extracted caching to decorator pattern. – While very OO, this is not very Pythonic. What would be a better solution? Something with Python decorators?
 
@@ -24,5 +24,5 @@ Thanks to Brett Schuchert for this prolific example – and for generally publis
 
 # License
 
-This material is published under the same [CC BY-SA 2.5](http://www.typemock.com/isolator-product-page) license as Brett’s talk.
+This material is published under the same [CC BY-SA 2.5](http://creativecommons.org/licenses/by-sa/2.5/) license as Brett’s talk.
 
